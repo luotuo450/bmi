@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI计算器</title>
+</head>
+
+<body>
+    <div id="title">
+        <h1>BMI计算器</h1>
+    </div>
+    <div id="all_input">
+        <input type="text" id="height_input" class="input" placeholder="请输入身高(m)">
+        <input type="text" id="weight_input" class="input" placeholder="请输入体重(kg)">
+    </div>
+    <div id="caculate_button" onclick="caculate()">计算</div>
+    <div id="result"></div>
+    <p style="color:white;text-align: center;">bmi参考值</p>
+    <ul class="bmi_list">
+        <li>BMI <= 18.5 偏瘦</li>
+        <li>BMI 18.5-23.9 正常</li>
+        <li>BMI 24.0-27.9 过重</li>
+        <li>BMI >=28.0 肥胖</li>
+    </ul>
+    <script>
+        function caculate() {
+            let height_input = document.getElementById('height_input').value;
+            let weight_input = document.getElementById('weight_input').value;
+            let bmi = weight_input / (height_input * height_input);
+            if (bmi < 18.5) {
+                let bmi_situation = "偏瘦";
+                let result = document.createElement("div"); //创建新的div元素
+                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
+                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
+            } else if (bmi >= 18.5 && bmi <= 23.9) {
+                let bmi_situation = "正常";
+                let result = document.createElement("div"); //创建新的div元素
+                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
+                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
+            } else if (bmi >= 24.0 && bmi <= 27.9) {
+                let bmi_situation = "过重";
+                let result = document.createElement("div"); //创建新的div元素
+                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
+                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
+            } else if (bmi >= 28.0) {
+                let bmi_situation = "肥胖";
+                let result = document.createElement("div"); //创建新的div元素
+                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
+                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
+            } else {
+                alert("您的输入有误");
+            }
+        }
+    </script>
+    <style>
+        .bmi_list {
+            list-style: none;
+            color: rgb(84, 84, 84);
+            text-align: center;
+            margin-right: 40px;
+        }
+
+        #bmi_result {
+            text-align: center;
+            color: rgb(248, 206, 206);
+            font-size: 20px;
+        }
+
+        body {
+            background: linear-gradient(to right, rgba(195, 0, 255, 0.429), rgba(0, 0, 255, 0.823));
+        }
+
+        #title {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-top: 60px;
+        }
+
+        #all_input {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .input {
+            border: 2px solid #dfe1e5;
+            outline: none;
+            width: 50%;
+            height: 40px;
+            border-radius: 15px;
+            padding-left: 15px;
+            margin: 0 auto;
+        }
+
+        #weight_input {
+            margin-top: 20px;
+        }
+
+        #caculate_button {
+            background: linear-gradient(to right, rgba(225, 255, 0, 0.392), rgba(0, 255, 60, 0.303));
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 55px;
+            height: 35px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            line-height: 34px;
+            user-select: none;
+            margin: 20px auto;
+        }
+    </style>
+</body>
+
+</html>
