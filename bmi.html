@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMI计算器</title>
+    <script src="https://cdn.staticfile.net/jquery/1.10.2/jquery.min.js">
+    </script>
 </head>
 
 <body>
@@ -25,46 +27,47 @@
         <li>BMI >=28.0 肥胖</li>
     </ul>
     <script>
+        function showResult(bmi, bmi_situation) {
+            let result = document.createElement("div");
+            result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>";
+            document.querySelector("#result").prepend(result); // 使用 prepend
+            $("#bmi_result").hide();
+            $("#bmi_result").slideDown(500);
+        }
+
         function caculate() {
             let height_input = document.getElementById('height_input').value;
             let weight_input = document.getElementById('weight_input').value;
             let bmi = weight_input / (height_input * height_input);
-            if (bmi < 18.5) {
-                let bmi_situation = "偏瘦";
-                let result = document.createElement("div"); //创建新的div元素
-                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
-                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
-            } else if (bmi >= 18.5 && bmi <= 23.9) {
-                let bmi_situation = "正常";
-                let result = document.createElement("div"); //创建新的div元素
-                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
-                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
-            } else if (bmi >= 24.0 && bmi <= 27.9) {
-                let bmi_situation = "过重";
-                let result = document.createElement("div"); //创建新的div元素
-                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
-                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
-            } else if (bmi >= 28.0) {
-                let bmi_situation = "肥胖";
-                let result = document.createElement("div"); //创建新的div元素
-                result.innerHTML = "<div id='bmi_result'>您的BMI为：" + bmi.toFixed(2) + "<br>您的体重情况为：" + bmi_situation + "</div>"; //给这个新的div元素添加innerHTML,并显示BMI值,取两位小数
-                document.querySelector("#result").appendChild(result); //把以上定义的新的元素添加到id为todo-list的元素中
-            } else {
+
+            if (isNaN(bmi) || height_input <= 0 || weight_input <= 0) {
                 alert("您的输入有误");
+            } else if (bmi <= 18.5) {
+                showResult(bmi, "偏瘦");
+            } else if (bmi <= 23.9) {
+                showResult(bmi, "正常");
+            } else if (bmi <= 27.9) {
+                showResult(bmi, "过重");
+            } else {
+                showResult(bmi, "肥胖");
             }
+            document.getElementById('height_input').value = "";
+            document.getElementById('weight_input').value = "";
+
         }
     </script>
     <style>
         .bmi_list {
             list-style: none;
-            color: rgb(84, 84, 84);
+            color: #ddd;
+            /* 修改为白色 */
             text-align: center;
             margin-right: 40px;
         }
 
         #bmi_result {
             text-align: center;
-            color: rgb(248, 206, 206);
+            color: #fafabf;
             font-size: 20px;
         }
 
@@ -74,7 +77,7 @@
 
         #title {
             text-align: center;
-            color: white;
+            color: #b0e0e6;
             font-size: 20px;
             margin-top: 60px;
         }
